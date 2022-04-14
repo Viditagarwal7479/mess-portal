@@ -8,7 +8,7 @@
 <%- include('includes/header.ejs') %>
 <main style="text-align: center">
     <h1 style="padding: 5px;">Feedback</h1>
-    <% if(!data){ %>
+    <% if(!locals.isAuth){ %>
         <h2>LogIn first!</h2>
         <a href="/login"><span style="font-size: 25px">LogIn></span></a>
 

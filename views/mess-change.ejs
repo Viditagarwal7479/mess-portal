@@ -1,13 +1,62 @@
 <%- include('includes/head.ejs', { title: 'Mess Change' }) %>
 <!-- <link rel="stylesheet" href="/styles/forms.css"> -->
-<!-- <link rel="stylesheet" href="/styles/auth.css"> -->
+<!-- <link rel="stylesheet" href="/styles/stylefeed1.css"> -->
+
+<link rel="stylesheet" href="/styles/forms.css">
+<script src="https://kit.fontawesome.com/67c66657c7.js"></script>
 </head>
 
-<body>
 <%- include('includes/header.ejs') %>
-<main style="text-align: center">
-    <h1>Mess Change</h1>
-</main>
-</body>
+<% if(!locals.isAuth){ %>
+    <h2>LogIn first!</h2>
+    <a href="/login"><span style="font-size: 25px">LogIn></span></a>
+
+<% }else{ %>
+    <div class="container">
+
+      <form action="/mess-change" method="POST">
+        <div class="areas">
+          <input type="text"  value="<%= data.name %> " readonly />
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="areas">
+          <input type="email"  value="<%= data.email %> " readonly />
+          <i class="fa fa-envelope"></i>
+        </div>
+        <div class="areas">
+          <input type="text" placeholder="Current Mess" name="current" />
+          <i class="fas fa-utensils"></i>
+        </div>
+        <div class="areas">
+          <select name="messname" id="messname" name="changed">
+            <div id="colorOptions">
+              <option
+              
+                class="place"
+                style="color: rgb(52, 232, 64)"
+                value="none"
+                selected
+                disabled
+                hidden
+                
+              >
+                Select a Mess
+              </option>
+              <option value="one">Mess One</option>
+              <option value="two">Mess Two</option>
+              <option value="three">Mess Three</option>
+              <option value="four">Mess Four</option>
+              <option value="five">Mess Five</option>
+            </div>
+          </select>
+          <i class="fas fa-utensils"></i>
+        </div>
+        <textarea cols="15" rows="5" placeholder="Your feedback"></textarea>
+        <button type="submit" >Submit</button>
+      </form>
+    </div>
+    <% } %>
+
+  </body>
 
 </html>

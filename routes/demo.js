@@ -1,10 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const emailValidator = require("deep-email-validator");
-
 const db = require("../data/database");
-const bcryptjs = require("bcryptjs");
+const ObjectId = require("mongodb").ObjectID;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,38 +25,50 @@ const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(CLIENT_ID);
 
 router.get("/", function (req, res) {
-  console.log(res.locals.isAuth);
+  res.locals.isAuth = req.session.isAuth;
+
   res.render("welcome");
 });
 
 router.get("/attendance", function (req, res) {
+  if (req.session.isAuth) {
+    res.locals.isAuth = true;
+  } else res.locals.isAuth = false;
   res.render("attendance");
 });
 
+router.post("/attendance", function (req, res) {
+  console.log(req.body.rollNumber);
+  res.redirect("/attendance");
+});
+
 router.get("/hostel/:id", function (req, res) {
+  res.locals.isAuth = req.session.isAuth;
+
   const id = req.params.id;
   res.render("hostel", { id: id });
 });
 
 router.get("/feedback", function (req, res) {
-  console.log(req.session.user);
+  res.locals.isAuth = req.session.isAuth;
   res.render("feedback", { data: req.session.user });
   // res.send("hello");
 });
 
 router.post("/feedback", function (req, res) {
   console.log(req.body.message);
-  console.log(req.body.name);
-  console.log(req.body.email);
   res.redirect("/");
 });
 
 router.get("/contact", function (req, res) {
-  // console.log(req.session);
+  res.locals.isAuth = req.session.isAuth;
+
   res.render("contact-us");
 });
 
 router.get("/login", function (req, res) {
+  res.locals.isAuth = req.session.isAuth;
+
   const data = req.session.user;
 
   res.render("login", { data: data });
@@ -77,7 +87,6 @@ router.post("/login", async function (req, res) {
   }
 
   const ticket = await verify();
-  // console.log(ticket);
   res.cookie("session-cookie", token);
   res.send("success");
   const user = { email: ticket.email, name: ticket.name };
@@ -85,23 +94,36 @@ router.post("/login", async function (req, res) {
   req.session.isAuth = true;
   res.locals.isAuth = true;
   req.session.save();
-  console.log(req.session.user);
 });
 
 router.get("/admin", function (req, res) {
   res.render("admin");
 });
 router.get("/messChange", function (req, res) {
-  res.render("mess-change");
+  res.locals.isAuth = req.session.isAuth;
+
+  res.render("mess-change", { data: req.session.user });
+});
+
+router.post("/mess-change", function (req, res) {
+  console.log(req.body.current);
+  console.log(req.body.messname);
+  res.redirect("/");
 });
 
 router.get("/balance", function (req, res) {
+  res.locals.isAuth = req.session.isAuth;
+
   res.render("balance");
 });
 
-router.get("/signout", async function (req, res) {
-  const email = req.session.user.email;
-  await db.getDb().collection("sessions").deleteOne({ email: email });
+router.post("/signout", async function (req, res) {
+  const id = req.sessionID;
+  console.log(id);
+  const data = await db.getDb().collection("sessions").find().toArray();
+  await db.getDb().collection("sessions").deleteOne({ _id: id });
+  const data1 = await db.getDb().collection("sessions").findOne({ _id: id });
+  req.session.isAuth = false;
   res.locals.isAuth = false;
   res.redirect("/");
 });

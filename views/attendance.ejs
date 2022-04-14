@@ -5,6 +5,20 @@
 <%- include('includes/header.ejs') %>
 <main style="text-align: center">
     <h1>Attendance</h1>
+    <% if(!locals.isAuth){ console.log(locals.isAuth) %>
+        <h2>LogIn first!</h2>
+        <a href="/login"><span style="font-size: 25px">LogIn></span></a>
+    
+    <% }else{ %>
+    <form action="/attendance" method="POST">
+        <label for="rollNumber">
+            Enter your roll Number
+        </label>
+        <input type="number" name="rollNumber" id="">
+        <button>Submit</button>
+    </form>
+    <% } %>
+
 </main>
 </body>
 
