@@ -14,7 +14,7 @@ main {
     font-size: 30px;
     background-color: rgba(255,255,255,0.65);
     border-radius: 0.7em;
-    padding-top: 10px;
+    padding: 20px;
     font-weight: revert;
 }
 
