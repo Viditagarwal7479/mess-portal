@@ -1,0 +1,52 @@
+<%- include('includes/head.ejs', { title: 'Register' }) %>
+<!-- <link rel="stylesheet" href="/styles/forms.css"> -->
+<!-- <link rel="stylesheet" href="/styles/auth.css"> -->
+</head>
+
+<body>
+<%- include('includes/header.ejs') %>
+<main style="text-align: center; min-height: 495px">
+    <h1>Register</h1>
+        <!-- <h2>LogIn first!</h2>
+        <a href="/login"><span style="font-size: 25px">LogIn></span></a> -->
+    
+    <form action="/register" method="POST" style="display: flex; flex-direction: column; width: 10rem; margin: auto;">
+        <label for="rollNumber">
+            Enter your roll Number
+        </label>
+        <input type="number" name="rollNumber" >
+        <label for="password" >Enter password</label>
+        <input  name="password">
+        <label for="mess" >Choose your mess</label>
+        <div class="areas">
+            <select name="mess" id="messname" name="changed">
+                <div id="colorOptions">
+                    <option
+
+                            class="place"
+                            style="color: rgb(52, 232, 64)"
+                            value="none"
+                            selected
+                            disabled
+                            hidden
+
+                    >
+                        Select a Mess
+                    </option>
+                    <option value="one">Mess One</option>
+                    <option value="two">Mess Two</option>
+                    <option value="three">Mess Three</option>
+                    <option value="four">Mess Four</option>
+                    <option value="five">Mess Five</option>
+                    <option value="six">Mess Six</option>
+                </div>
+            </select>
+            <i class="fas fa-utensils"></i>
+        </div>
+        <button>Submit</button>
+    </form>
+</main>
+<%- include('includes/footer.ejs') %>
+</body>
+
+</html>
