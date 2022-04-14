@@ -4,6 +4,10 @@
     justify-content: center;
     /*margin-left: 340px;*/
     /*margin-top: 60px;*/
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 0.7em;
+    padding-top: 10px;
+    font-weight: revert;
     margin: fill;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
@@ -27,7 +31,7 @@
 }
 .container form h1{
     padding: 12px 0;
-    color: whitesmoke;
+    /*color: whitesmoke;*/
 }
 .container form .areas {
     position: relative;
@@ -35,24 +39,25 @@
 .container form input{
     width: 100%;
     max-height: 100px;
-    margin: 4px 0;
-    color:  rgba(250, 250, 250, 1);
+    margin: 15px 0;
+    /*color:  rgba(250, 250, 250, 1);*/
     background-color:rgba(36, 167, 123, 0);
     border-bottom-left-radius: 10px;
     border-style:ridge;
-    border-color: aliceblue;
+    border-color: rgb(20, 20, 20);
     padding: 0 15px;
     font-size: 20px ;
 }
 .container .areas select{
     width: 100%;
     max-height: 100px;
-    margin: 4px 0;
-    color: aliceblue;
+    margin: 15px 0;
+    border-width: 0.1em;
+    /*color: aliceblue;*/
     background-color:rgba(36, 167, 123, 0);
     border-bottom-left-radius: 10px;
     border-style:ridge;
-    border-color: aliceblue;
+    border-color: rgb(20, 20, 20);
     padding: 0 15px;
     font-size: 20px ;
 }
@@ -65,27 +70,29 @@
     font-size: 18px;
     transform: translate(50%);
     top: 20%;
-    color: white;
+
 }
 .container form textarea{
     width: 88%;
-    margin: auto;
+    margin: 15px 0;
     padding: 5px 15px;
     border-bottom-left-radius: 10px;
-    color:  rgba(250, 250, 250, 1);
+    /*color:  rgba(250, 250, 250, 1);*/
     background-color:rgba(36, 167, 123,0);
     padding: 0 20px;
+    border-width: 0.1em;
     font-size:25px ;
 }
 .container form button{
     width: 88%;
     margin-left: auto;
     margin-top: 5px;
+    margin-bottom: 10px;
     border: none;
     background: rgb(137, 222, 140);
     color: black;
     padding: 12px 0;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
 }
 .container form input:focus,
@@ -101,6 +108,6 @@
     color:  rgba(0, 0, 25, 1);
     transition: all 0.3s ease;
 }
-.container ::placeholder{
-    color:rgba(255,255,250,0.6);
-}
+/*.container ::placeholder{*/
+/*    color:rgba(255,255,250,0.6);*/
+/*}*/
