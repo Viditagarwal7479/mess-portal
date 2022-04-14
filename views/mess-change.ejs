@@ -5,10 +5,12 @@
 <link rel="stylesheet" href="/styles/forms.css">
 <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
 </head>
+
 <body>
 <%- include('includes/header.ejs') %>
 <main style="text-align: center; min-height: 495px">
     <h1 style="padding: 5px;">Mess Change</h1>
+
     <% if(!locals.isAuth){ %>
         <h2>LogIn first!</h2>
         <a href="/login"><span style="font-size: 25px">LogIn></span></a>

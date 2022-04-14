@@ -1,23 +1,23 @@
 <%- include('includes/head.ejs', { title: 'Attendance' }) %>
-<!-- <% include('includes/back.ejs') %> -->
 <link rel="stylesheet" href="/styles/forms.css">
 </head>
 <body>
 <%- include('includes/header.ejs') %>
 <main style="text-align: center; min-height: 495px">
     <h1>Attendance</h1>
-    <!-- <h2>LogIn first!</h2>
-    <a href="/login"><span style="font-size: 25px">LogIn></span></a> -->
     <div class="container">
-    <form action="/attendance" method="POST">
-        <label for="rollNumber">
+        <form action="/attendance" method="POST">
+<!--    Roll number field        -->
+            <label for="rollNumber"></label>
+            <input type="number" name="rollNumber" id="" placeholder="Enter your roll Number">
 
-        </label>
-        <input type="number" name="rollNumber" id="" placeholder="Enter your roll Number">
-        <label for="password"></label>
-        <input type="password" name="password" placeholder="Enter password">
-        <button>Submit</button>
-    </form>
+<!--    Password field        -->
+            <label for="password"></label>
+            <input type="password" name="password" placeholder="Enter password">
+
+<!--    Submit -->
+            <button>Submit</button>
+        </form>
     </div>
 
 </main>
