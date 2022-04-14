@@ -1,0 +1,55 @@
+<%- include('includes/head.ejs', { title: 'Feedback' }) %>
+<link rel="stylesheet" href="/styles/forms.css">
+<script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+
+</head>
+
+<body>
+<%- include('includes/header.ejs') %>
+<main style="text-align: center">
+    <h1 style="padding: 5px;">Feedback</h1>
+    <% if(!data){ %>
+        <h2>LogIn first!</h2>
+        <a href="/login"><span style="font-size: 25px">LogIn></span></a>
+
+    <% }else{ %>
+        <div class="container">
+
+            <form action="/feedback" method="POST">
+<!--                <h1>Feedback Portal</h1>-->
+                <div class="areas">
+                    <input type="text" name="name" value="<%= data.name %> " readonly>
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="areas">
+                    <input type="email" name="email" value="<%= data.email %> " readonly>
+                    <i class="fa fa-envelope"></i>
+                </div>
+                <div class="areas">
+                    <select name="messname" id="messname">
+                        <div id="colorOptions">
+                            <option class="place" style="color:rgb(52, 232, 64)" value="none" selected disabled hidden>
+                                Select a Mess
+                            </option>
+                            <option value="one">Mess One</option>
+                            <option value="two">Mess Two</option>
+                            <option value="three">Mess Three</option>
+                            <option value="four">Mess Four</option>
+                            <option value="five">Mess Five</option>
+                            <option value="six">Mess Six</option>
+                            <option value="seven">Mess Seven</option>
+
+                        </div>
+                    </select>
+                    <i class="fas fa-utensils"></i>
+
+                </div>
+                <textarea name="message" cols="15" rows="5" placeholder="Your feedback"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    <% } %>
+</main>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+body {
+    background-image: url('/images/welcome.jpg');
+    background-color: white;
+    background-size: cover;
+    background-position: top center;
+}

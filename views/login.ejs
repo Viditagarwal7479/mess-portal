@@ -1,0 +1,63 @@
+<%- include('includes/head.ejs', { title: 'Login' }) %>
+<!--<link rel="stylesheet" href="/styles/forms.css">-->
+<link rel="stylesheet" href="/styles/auth.css">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id"
+      content="1006096379075-2o56con4lhsrpbviut9ok2722q0sjiue.apps.googleusercontent.com">
+</head>
+
+<body>
+<%- include('includes/header.ejs') %>
+<main id="signup" style="text-align: center">
+    <h1>Login</h1>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <script>function onSignIn(googleUser) {
+            var id_token = googleUser.getAuthResponse().id_token;
+            // console.log(id_token);
+            var profile = googleUser.getBasicProfile();
+            const user = {
+                id: profile.getId(),
+                name: profile.getName(),
+                email: profile.getEmail()
+            }
+            console.log(user);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/login');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            // console.log(googleUser.getAuthResponse());
+
+            xhr.onload = function () {
+                if (xhr.responseText == 'success') {
+                    location.assign('/');
+                }
+            };
+            xhr.send(JSON.stringify({token: id_token, user: user}));
+        }</script>
+    <!-- <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
+    </script> -->
+    <!-- <form action="/login" method="POST">
+      <div class="form-control">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button class="btn">Log in</button>
+    </form> -->
+    <!-- <div id="auth-alternative">
+      <a class="btn btn-alt" href="/signup">Create a new user</a>
+    </div> -->
+</main>
+</body>
+
+</html>
