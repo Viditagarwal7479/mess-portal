@@ -18,15 +18,14 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(demoRoutes);
 
-// app.use(function (error, req, res, next) {
-
-//   res.render("500");
-// });
+app.use(function (error, req, res, next) {
+  res.render("500");
+});
 
 db.connectToDatabase().then(function () {
-    app.listen(3000);
+  app.listen(3000);
 });
