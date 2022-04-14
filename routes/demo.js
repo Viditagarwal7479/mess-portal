@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 
 const db = require("../data/database");
 const ObjectId = require("mongodb").ObjectID;
+var nodemailer = require("nodemailer");
+const bcrypt = require("bcryptjs");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -38,6 +40,14 @@ router.get("/attendance", function (req, res) {
 });
 
 router.post("/attendance", function (req, res) {
+  // ***********************************************
+
+  // console.log(req.session.user.email);
+  console.log(req.body.password);
+  const hashedPassword = bcrypt.hash(req.body.password, 12);
+
+  // ***********************************************
+
   console.log(req.body.rollNumber);
   res.redirect("/attendance");
 });
@@ -108,13 +118,39 @@ router.get("/messChange", function (req, res) {
 router.post("/mess-change", function (req, res) {
   console.log(req.body.current);
   console.log(req.body.messname);
+  const user = db
+    .getDb()
+    .collection("users")
+    .findOne({ email: req.body.email });
+  user.mess = req.body.messname;
+  db.getDb().collection("users").deleteOne({ email: req.body.email });
+  db.getDb().collection("users").insertOne(user);
+
   res.redirect("/");
 });
 
-router.get("/balance", function (req, res) {
+router.get("/register", function (req, res) {
   res.locals.isAuth = req.session.isAuth;
 
-  res.render("balance");
+  console.log(req.body.password);
+
+  res.render("register");
+});
+
+router.post("/register", function (req, res) {
+  console.log(req.body.password);
+
+  const hashedPassword = bcrypt.hash(req.body.password, 12);
+  const user = {
+    email: req.body.email,
+    rollNumber: req.body.rollNumber,
+    password: hashedPassword,
+    mess: req.body.mess,
+  };
+
+  db.getDb().collection("users").insertOne(user);
+
+  res.redirect("/");
 });
 
 router.post("/signout", async function (req, res) {

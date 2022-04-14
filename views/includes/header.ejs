@@ -18,9 +18,13 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
+          <% if(locals.isAuth){ %>
+
           <li class="nav-item">
             <a class="nav-link" href="/attendance">Attendance</a>
           </li>
+          <% } %>
+
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -48,17 +52,25 @@
             </ul>
           </li>
           <li class="nav-item">
+            <% if(locals.isAuth){ %>
+
             <a class="nav-link" href="/feedback">Feedback/Complaint</a>
           </li>
+          <% } %>
+
           <li class="nav-item">
             <a class="nav-link" href="/contact">About Us</a>
           </li>
+          <% if(locals.isAuth){ %>
           <li class="nav-item">
             <a class="nav-link" href="/messChange">Mess Change Portal</a>
           </li>
+          <% } %> <% if(locals.isAuth){ %>
+
           <li class="nav-item">
-            <a class="nav-link" href="/balance">Balance</a>
+            <a class="nav-link" href="/register">Register</a>
           </li>
+          <% } %>
         </ul>
       </div>
       <div class="d-flex justify-content-end collapse navbar-collapse">
