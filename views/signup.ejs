@@ -5,7 +5,7 @@
 
 <body>
 <%- include('includes/header.ejs') %>
-<main id="signup" style="text-align: center">
+<main id="signup" style="text-align: center; min-height: 495px">
     <h1>Signup</h1>
     <% if(previousData.hasError) { %>
         <p id="input-error">
@@ -32,6 +32,7 @@
         <a class="btn btn-alt" href="/login">Login instead</a>
     </div>
 </main>
+<%- include('includes/footer.ejs') %>
 </body>
 
 </html>

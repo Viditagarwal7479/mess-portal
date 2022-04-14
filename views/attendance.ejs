@@ -3,7 +3,7 @@
 </head>
 <body>
 <%- include('includes/header.ejs') %>
-<main style="text-align: center">
+<main style="text-align: center; min-height: 495px">
     <h1>Attendance</h1>
     <% if(!locals.isAuth){ console.log(locals.isAuth) %>
         <h2>LogIn first!</h2>
@@ -20,6 +20,7 @@
     <% } %>
 
 </main>
+<%- include('includes/footer.ejs') %>
 </body>
 
 </html>

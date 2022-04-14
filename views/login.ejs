@@ -8,7 +8,7 @@
 
 <body>
 <%- include('includes/header.ejs') %>
-<main id="signup" style="text-align: center">
+<main id="signup" style="text-align: center; min-height: 495px">
     <h1>Login</h1>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <script>function onSignIn(googleUser) {
@@ -58,6 +58,7 @@
       <a class="btn btn-alt" href="/signup">Create a new user</a>
     </div> -->
 </main>
+<%- include('includes/footer.ejs') %>
 </body>
 
 </html>

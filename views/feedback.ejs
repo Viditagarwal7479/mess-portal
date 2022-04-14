@@ -6,7 +6,7 @@
 
 <body>
 <%- include('includes/header.ejs') %>
-<main style="text-align: center">
+<main style="text-align: center; min-height: 495px">
     <h1 style="padding: 5px;">Feedback</h1>
     <% if(!locals.isAuth){ %>
         <h2>LogIn first!</h2>
@@ -37,7 +37,6 @@
                             <option value="four">Mess Four</option>
                             <option value="five">Mess Five</option>
                             <option value="six">Mess Six</option>
-                            <option value="seven">Mess Seven</option>
 
                         </div>
                     </select>
@@ -50,6 +49,7 @@
         </div>
     <% } %>
 </main>
+<%- include('includes/footer.ejs') %>
 </body>
 
 </html>
