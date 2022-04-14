@@ -1,16 +1,18 @@
 .tableback {
     background-color: aliceblue;
     width: 1000px;
-    margin-left:50px;
+    margin-left: 50px;
     margin-top: 20px;
 }
-.intro{
+
+.intro {
     font-size: 30px;
     color: cornsilk;
     font-weight: bold;
     padding: 20px;
 }
-.info{
+
+.info {
     text-align: left;
     justify-content: left;
     margin-left: 50px;

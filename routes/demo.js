@@ -7,7 +7,7 @@ var nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
@@ -21,147 +21,147 @@ app.use(session(sessionConfig));
 
 const router = express.Router();
 const CLIENT_ID =
-  "1006096379075-2o56con4lhsrpbviut9ok2722q0sjiue.apps.googleusercontent.com";
+    "1006096379075-2o56con4lhsrpbviut9ok2722q0sjiue.apps.googleusercontent.com";
 
-const { OAuth2Client } = require("google-auth-library");
+const {OAuth2Client} = require("google-auth-library");
 const client = new OAuth2Client(CLIENT_ID);
 
 router.get("/", function (req, res) {
-  res.locals.isAuth = req.session.isAuth;
+    res.locals.isAuth = req.session.isAuth;
 
-  res.render("welcome");
+    res.render("welcome");
 });
 
 router.get("/attendance", function (req, res) {
-  if (req.session.isAuth) {
-    res.locals.isAuth = true;
-  } else res.locals.isAuth = false;
-  res.render("attendance");
+    if (req.session.isAuth) {
+        res.locals.isAuth = true;
+    } else res.locals.isAuth = false;
+    res.render("attendance");
 });
 
 router.post("/attendance", function (req, res) {
-  // ***********************************************
+    // ***********************************************
 
-  // console.log(req.session.user.email);
-  console.log(req.body.password);
-  const hashedPassword = bcrypt.hash(req.body.password, 12);
+    // console.log(req.session.user.email);
+    console.log(req.body.password);
+    const hashedPassword = bcrypt.hash(req.body.password, 12);
 
-  // ***********************************************
+    // ***********************************************
 
-  console.log(req.body.rollNumber);
-  res.redirect("/attendance");
+    console.log(req.body.rollNumber);
+    res.redirect("/attendance");
 });
 
 router.get("/hostel/:id", function (req, res) {
-  res.locals.isAuth = req.session.isAuth;
+    res.locals.isAuth = req.session.isAuth;
 
-  const id = req.params.id;
-  res.render("hostel", { id: id });
+    const id = req.params.id;
+    res.render("hostel", {id: id});
 });
 
 router.get("/feedback", function (req, res) {
-  res.locals.isAuth = req.session.isAuth;
-  res.render("feedback", { data: req.session.user });
-  // res.send("hello");
+    res.locals.isAuth = req.session.isAuth;
+    res.render("feedback", {data: req.session.user});
+    // res.send("hello");
 });
 
 router.post("/feedback", function (req, res) {
-  console.log(req.body.message);
-  res.redirect("/");
+    console.log(req.body.message);
+    res.redirect("/");
 });
 
 router.get("/contact", function (req, res) {
-  res.locals.isAuth = req.session.isAuth;
+    res.locals.isAuth = req.session.isAuth;
 
-  res.render("contact-us");
+    res.render("contact-us");
 });
 
 router.get("/login", function (req, res) {
-  res.locals.isAuth = req.session.isAuth;
+    res.locals.isAuth = req.session.isAuth;
 
-  const data = req.session.user;
+    const data = req.session.user;
 
-  res.render("login", { data: data });
+    res.render("login", {data: data});
 });
 
 router.post("/login", async function (req, res) {
-  const token = req.body.token;
+    const token = req.body.token;
 
-  async function verify() {
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: CLIENT_ID,
-    });
-    const payload = ticket.getPayload();
-    return payload;
-  }
+    async function verify() {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: CLIENT_ID,
+        });
+        const payload = ticket.getPayload();
+        return payload;
+    }
 
-  const ticket = await verify();
-  res.cookie("session-cookie", token);
-  res.send("success");
-  const user = { email: ticket.email, name: ticket.name };
-  req.session.user = user;
-  req.session.isAuth = true;
-  res.locals.isAuth = true;
-  req.session.save();
+    const ticket = await verify();
+    res.cookie("session-cookie", token);
+    res.send("success");
+    const user = {email: ticket.email, name: ticket.name};
+    req.session.user = user;
+    req.session.isAuth = true;
+    res.locals.isAuth = true;
+    req.session.save();
 });
 
 router.get("/admin", function (req, res) {
-  res.render("admin");
+    res.render("admin");
 });
 router.get("/messChange", function (req, res) {
-  res.locals.isAuth = req.session.isAuth;
+    res.locals.isAuth = req.session.isAuth;
 
-  res.render("mess-change", { data: req.session.user });
+    res.render("mess-change", {data: req.session.user});
 });
 
 router.post("/mess-change", function (req, res) {
-  console.log(req.body.current);
-  console.log(req.body.messname);
-  const user = db
-    .getDb()
-    .collection("users")
-    .findOne({ email: req.body.email });
-  user.mess = req.body.messname;
-  db.getDb().collection("users").deleteOne({ email: req.body.email });
-  db.getDb().collection("users").insertOne(user);
+    console.log(req.body.current);
+    console.log(req.body.messname);
+    const user = db
+        .getDb()
+        .collection("users")
+        .findOne({email: req.body.email});
+    user.mess = req.body.messname;
+    db.getDb().collection("users").deleteOne({email: req.body.email});
+    db.getDb().collection("users").insertOne(user);
 
-  res.redirect("/");
+    res.redirect("/");
 });
 
 router.get("/register", function (req, res) {
-  res.locals.isAuth = req.session.isAuth;
+    res.locals.isAuth = req.session.isAuth;
 
-  console.log(req.body.password);
+    console.log(req.body.password);
 
-  res.render("register");
+    res.render("register");
 });
 
 router.post("/register", function (req, res) {
-  console.log(req.body.password);
+    console.log(req.body.password);
 
-  const hashedPassword = bcrypt.hash(req.body.password, 12);
-  const user = {
-    email: req.body.email,
-    rollNumber: req.body.rollNumber,
-    password: hashedPassword,
-    mess: req.body.mess,
-  };
+    const hashedPassword = bcrypt.hash(req.body.password, 12);
+    const user = {
+        email: req.body.email,
+        rollNumber: req.body.rollNumber,
+        password: hashedPassword,
+        mess: req.body.mess,
+    };
 
-  db.getDb().collection("users").insertOne(user);
+    db.getDb().collection("users").insertOne(user);
 
-  res.redirect("/");
+    res.redirect("/");
 });
 
 router.post("/signout", async function (req, res) {
-  const id = req.sessionID;
-  console.log(id);
-  const data = await db.getDb().collection("sessions").find().toArray();
-  await db.getDb().collection("sessions").deleteOne({ _id: id });
-  const data1 = await db.getDb().collection("sessions").findOne({ _id: id });
-  req.session.isAuth = false;
-  res.locals.isAuth = false;
-  res.redirect("/");
+    const id = req.sessionID;
+    console.log(id);
+    const data = await db.getDb().collection("sessions").find().toArray();
+    await db.getDb().collection("sessions").deleteOne({_id: id});
+    const data1 = await db.getDb().collection("sessions").findOne({_id: id});
+    req.session.isAuth = false;
+    res.locals.isAuth = false;
+    res.redirect("/");
 });
 
 module.exports = router;

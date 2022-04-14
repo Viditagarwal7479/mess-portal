@@ -5,15 +5,15 @@
 <%- include('includes/header.ejs') %>
 <main style="text-align: center; min-height: 495px">
     <h1>Attendance</h1>
-        <!-- <h2>LogIn first!</h2>
-        <a href="/login"><span style="font-size: 25px">LogIn></span></a> -->
-    
+    <!-- <h2>LogIn first!</h2>
+    <a href="/login"><span style="font-size: 25px">LogIn></span></a> -->
+
     <form action="/attendance" method="POST">
         <label for="rollNumber">
             Enter your roll Number
         </label>
         <input type="number" name="rollNumber" id="">
-        <label for="password" >Enter password</label>
+        <label for="password">Enter password</label>
         <input type="password" name="password">
         <button>Submit</button>
     </form>
